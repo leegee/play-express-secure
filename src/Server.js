@@ -2,14 +2,13 @@
 
 const express   = require('express'),
   helmet        = require('helmet'),
-  RateLimiter   = require('express-rate-limit');
-
+  RateLimiter   = require('express-rate-limit'),
   cookieSession = require('cookie-session'),
   cookieParser  = require('cookie-parser'),
   bodyParser    = require('body-parser'),
   csrf          = require('csurf');
 
-const rateLimiter = new RateLimit({
+const rateLimiter = new RateLimiter({
   windowMs: 15*60*1000, // 15 minutes 
   max: 100, // limit each IP to 100 requests per windowMs 
   delayMs: 0 // disable delaying - full speed until the max limit is reached 
@@ -59,3 +58,4 @@ app.post('/process', parseForm, csrfProtection, function(req, res) {
 
 // app.listen(3000);  
 
+module.exports  = app;
